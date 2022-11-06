@@ -43,10 +43,12 @@
 }
 
 .ant-layout-header {
-    margin: 0 10px;
+    margin: 0 10px !important;
     border-radius: 5px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    
 }
 
 .logo h3{

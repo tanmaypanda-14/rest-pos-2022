@@ -1,6 +1,7 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined, LogoutOutlined,SettingOutlined,UnorderedListOutlined, UserOutlined, HomeOutlined, CopyOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined, ShoppingCartOutlined, LogoutOutlined,SettingOutlined,UnorderedListOutlined, UserOutlined, HomeOutlined, CopyOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React, { useState } from 'react';
+import {useSelector} from 'react-redux';
 import {Link} from 'react-router-dom';
 
 import '../styles/Layout.css';
@@ -8,6 +9,7 @@ import '../styles/Layout.css';
 const { Header, Sider, Content } = Layout;
 const DLayout = (props) => {
     const [collapsed, setCollapsed] = useState(false);
+    const {cartItems} = useSelector(state => state.rootReducer);
     return (
         <Layout>
             <Sider trigger={null} collapsible collapsed={collapsed}>
@@ -46,6 +48,11 @@ const DLayout = (props) => {
                         className: 'trigger',
                         onClick: () => setCollapsed(!collapsed),
                     })}
+                    <div className='cart-count d-flex align-items-center'>
+                        <b><p className='mt-3 mr-2'>{cartItems.length}</p></b>
+                        <ShoppingCartOutlined />
+                    </div>
+
                 </Header>
                 <Content
                     className="site-layout-background"
