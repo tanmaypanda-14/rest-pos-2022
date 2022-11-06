@@ -1,0 +1,12 @@
+.item {
+    box-shadow: 0 0 3 rgb(34, 31, 31);
+}
+
+.item .name{
+    color: rgb(241, 70, 70);
+}
+
+.item .price{
+    text-align: center;
+    color: rgb(20, 18, 18);
+}
