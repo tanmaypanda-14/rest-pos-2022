@@ -15,4 +15,15 @@ router.get('/get-all-items', async (req, res) => {
     }
 });
 
+router.post('/add-item', async (req, res) => {
+    try{
+        const newItem = new itemsModel(req.body);
+        await newItem.save();
+        res.send("Item added successfully");
+    }
+    catch(error){
+        res.status(404).json({ message: error.message });
+    }
+});
+
 export default router;
