@@ -2,22 +2,29 @@ import DLayout from '../components/DLayout.js';
 import React, {useEffect} from 'react';
 import axios from 'axios';
 import { Row, Col } from 'antd';
+import { useDispatch } from 'react-redux';
 import Item from '../components/Item.js';
 
 import '../styles/items.css'
 
 function Home() {
   const [itemsData, setItemsData] = React.useState([]);
+  const dispatch = useDispatch();
   const getAllItems = () => {
-    axios.get('/api/items/get-all-items').then((response) => {
+    dispatch({type: 'showLoading'});
+    axios
+    .get('/api/items/get-all-items')
+    .then((response) => {
+      dispatch({type: 'hideLoading'});
       setItemsData(response.data);
     }).catch((error) => {
+      dispatch({type: 'hideLoading'});
       console.log(error);
     });
   };  
 
   useEffect(() => {
-    getAllItems();
+    getAllItems();// eslint-disable-next-line
   }, []);
 
   return (
