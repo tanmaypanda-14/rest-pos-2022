@@ -36,4 +36,14 @@ router.post('/edit-item', async (req, res) => {
     }
 });
 
+router.post('/delete-item', async (req, res) => {
+    try{
+        await itemsModel.findOneAndDelete({ _id: req.body.itemId });
+        res.send("Item Deleted successfully");
+    }
+    catch(error){
+        res.status(404).json({ message: error.message });
+    }
+});
+
 export default router;

@@ -22,6 +22,11 @@
   border-radius: 5px;
 }
 
+.ant-layout-content {
+  height: 60vh;
+  overflow-y: scroll;
+}
+
 .ant-layout-has-sider {
   padding: 15px !important;
 }
