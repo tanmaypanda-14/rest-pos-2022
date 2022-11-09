@@ -72,7 +72,7 @@ const DLayout = (props) => {
                     style={{
                         margin: '10px',
                         padding: 24,
-                        minHeight: 280,
+                        minHeight: '80vh',
                     }}
                 >
                     {props.children}

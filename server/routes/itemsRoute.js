@@ -26,4 +26,14 @@ router.post('/add-item', async (req, res) => {
     }
 });
 
+router.post('/edit-item', async (req, res) => {
+    try{
+        await itemsModel.findOneAndUpdate({ _id: req.body.itemId }, req.body);
+        res.send("Item Updated successfully");
+    }
+    catch(error){
+        res.status(404).json({ message: error.message });
+    }
+});
+
 export default router;

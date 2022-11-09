@@ -9,6 +9,7 @@ import { Button, Form, Input, message, Select, Modal, Table } from 'antd';
 function Items() {
   const [itemsData, setItemsData] = useState([]);
   const [addEditModalVisibility, setAddEditModalVisibilty] = useState(false);
+  const [editingItem, setEditingItem] = useState(null);
   const dispatch = useDispatch();
   const getAllItems = () => {
     dispatch({ type: 'showLoading' });
@@ -50,62 +51,90 @@ function Items() {
       dataIndex: '_id',
       render: (id, record) =>
         <div className='d-flex'>
+          <EditOutlined className='mx-2' onClick={() => {
+            setEditingItem(record);
+            setAddEditModalVisibilty(true);
+          }} />
           <DeleteOutlined className='mx-2' />
-          <EditOutlined className='mx-2' />
         </div>
     },
   ]
 
   const onFinish = (values) => {
     dispatch({ type: 'showLoading' });
-    axios
-      .post('/api/items/add-item', values)
-      .then((response) => {
-        dispatch({ type: 'hideLoading' });
-        message.success("Item added successfully");
-        setAddEditModalVisibilty(false);
-        getAllItems();
-      }).catch((error) => {
-        dispatch({ type: 'hideLoading' });
-        console.log(error);
-        message.error("Something went wrong");
-      });
+    if (editingItem===null) {
+      axios
+        .post('/api/items/add-item', values)
+        .then((response) => {
+          dispatch({ type: 'hideLoading' });
+          message.success("Item added successfully");
+          setAddEditModalVisibilty(false);
+          getAllItems();
+        }).catch((error) => {
+          dispatch({ type: 'hideLoading' });
+          console.log(error);
+          message.error("Something went wrong");
+        });
+    } else {
+      axios
+        .post('/api/items/edit-item', { ...values, itemId: editingItem._id })
+        .then((response) => {
+          dispatch({ type: 'hideLoading' });
+          message.success("Item Edited successfully");
+          setEditingItem(null);
+          setAddEditModalVisibilty(false);
+          getAllItems();
+        }).catch((error) => {
+          dispatch({ type: 'hideLoading' });
+          console.log(error);
+          message.error("Something went wrong");
+        });
+    }
   }
 
   return (
     <DLayout>
       <div className='d-flex justify-content-between'>
         <h1>Items</h1>
-        <Button type='primary' onClick={()=>setAddEditModalVisibilty(true)}>Add Item</Button>
+        <Button type='primary' onClick={() => setAddEditModalVisibilty(true)}>Add Item</Button>
       </div>
       <Table columns={columns} dataSource={itemsData} bordered />
 
-      <Modal open={addEditModalVisibility} title='Add New Item' footer={false} onCancel={()=>setAddEditModalVisibilty(false)}>
-        <Form layout='vertical' onFinish={onFinish}>
-          <Form.Item name='name' label='Name'>
-            <Input />            
-          </Form.Item>
-          <Form.Item name='price' label='Price'>
-            <Input />            
-          </Form.Item>
-          <Form.Item name='image' label='Image URL'>
-            <Input />            
-          </Form.Item>
-          <Form.Item name='category' label='Category'>
-            <Select>
-              <Select.Option value='appetizers'>Appetizers</Select.Option>
-              <Select.Option value='fries'>Fries</Select.Option>
-              <Select.Option value='rolls'>Rolls</Select.Option>
-            </Select>
-          </Form.Item>
+      {addEditModalVisibility && (
+        <Modal
+          open={addEditModalVisibility}
+          title={`${editingItem !== null ? 'Edit' : 'Add'} Item`}
+          footer={false}
+          onCancel={() => {
+            setEditingItem(null)
+            setAddEditModalVisibilty(false)
+          }}>
+          <Form initialValues={editingItem} layout='vertical' onFinish={onFinish}>
+            <Form.Item name='name' label='Name'>
+              <Input />
+            </Form.Item>
+            <Form.Item name='price' label='Price'>
+              <Input />
+            </Form.Item>
+            <Form.Item name='image' label='Image URL'>
+              <Input />
+            </Form.Item>
+            <Form.Item name='category' label='Category'>
+              <Select>
+                <Select.Option value='appetizers'>Appetizers</Select.Option>
+                <Select.Option value='fries'>Fries</Select.Option>
+                <Select.Option value='rolls'>Rolls</Select.Option>
+              </Select>
+            </Form.Item>
 
-          <div className='d-flex justify-content-end' >
-            <Button htmlType="submit" type='primary'>Save</Button>            
-          </div>
+            <div className='d-flex justify-content-end' >
+              <Button htmlType="submit" type='primary'>Save</Button>
+            </div>
 
-        </Form>
-      </Modal>
+          </Form>
+        </Modal>
 
+      )}
     </DLayout>
   );
 }
