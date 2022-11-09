@@ -30,8 +30,9 @@ function Home() {
   return (
     <DLayout>
         <Row gutter={20}>{itemsData.map((item) => {
+          console.log(item);
           return <Col xs={24} lg={6} md={6} sm={6}>
-            <Item key="{item}" item={item}/>
+            <Item key={item._id} item={item}/>
           </Col>
         })}</Row>
     </DLayout>

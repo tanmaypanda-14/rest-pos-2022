@@ -16,7 +16,7 @@ function Cart() {
   const decreaseQuantity = (record) => {
     dispatch({ 
       type: 'updateCart', 
-      payload: { ...record, quantity: record.quantity - 1 }
+      payload: { ...record, quantity: record.quantity === 0 ? 0 : record.quantity - 1 }
      })
   }
   const deleteItem = (record) => {

@@ -3,7 +3,7 @@ import DLayout from '../components/DLayout.js'
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
-import { Button, Form, message, Select, Modal, Table } from 'antd';
+import { Button, Form, Input, message, Select, Modal, Table } from 'antd';
 
 
 function Items() {
@@ -83,13 +83,13 @@ function Items() {
       <Modal open={addEditModalVisibility} title='Add New Item' footer={false} onCancel={()=>setAddEditModalVisibilty(false)}>
         <Form layout='vertical' onFinish={onFinish}>
           <Form.Item name='name' label='Name'>
-            <input/>            
+            <Input />            
           </Form.Item>
           <Form.Item name='price' label='Price'>
-            <input/>            
+            <Input />            
           </Form.Item>
           <Form.Item name='image' label='Image URL'>
-            <input/>            
+            <Input />            
           </Form.Item>
           <Form.Item name='category' label='Category'>
             <Select>
