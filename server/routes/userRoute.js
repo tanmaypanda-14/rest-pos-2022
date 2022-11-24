@@ -1,10 +1,10 @@
-import express from "express";
-import UserModel from "../models/userModel.js";
+const express = require("express");
+const UserModel = require("../models/userModel");
 const router = express.Router();
 
 router.post("/login", async (req, res) => {
   try {
-    const user = await findOne({
+    const user = await UserModel.findOne({
       userId: req.body.userId,
       password: req.body.password,
       verified: true,
@@ -29,4 +29,4 @@ router.post("/register", async (req, res) => {
   }
 });
 
-export default router;
+module.exports = router;

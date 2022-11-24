@@ -45,7 +45,10 @@ const DLayout = (props) => {
                     <Menu.Item key='settings' icon=<SettingOutlined /> >
                         <Link to='/settings'>Settings</Link>
                     </Menu.Item>
-                    <Menu.Item key='logout' icon=<LogoutOutlined /> >
+                    <Menu.Item key='logout' icon={<LogoutOutlined />} onClick={()=>{
+                        localStorage.removeItem('rest-user')
+                        navigate('/login')
+                    }} >
                         Logout
                     </Menu.Item>
                 </Menu>

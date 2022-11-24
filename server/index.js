@@ -1,31 +1,25 @@
-import * as dotenv from 'dotenv';
-dotenv.config();
-
-import express from 'express';
-import cors from 'cors';
-
-import connectDB from './db/connect.js';
-import itemsRoute from './routes/itemsRoute.js';
-import usersRoute from './routes/userRoute.js';
+const express = require("express");
+const dbConnect = require("./dbConnect");
 
 const app = express();
-app.use(cors());
 app.use(express.json());
-app.use('/api/items/', itemsRoute);
-app.use('/api/users/', usersRoute);
+const itemsRoute = require("./routes/itemsRoute");
+const usersRoute = require("./routes/userRoute");
+const billsRoute = require('./routes/billsRoute')
+app.use("/api/items/", itemsRoute);
+app.use("/api/users/", usersRoute);
+app.use("/api/bills/", billsRoute);
+const path = require('path')
 
-const PORT = process.env.PORT || 5000;
-
-
-const start = async()=>{
-    try{
-        await connectDB(process.env.MONGO_URI);
-        app.listen(PORT,console.log(`Server listening on port 5000`));
-    }
-    catch(error)
-    {
-        console.log(error);
-    }
+if(process.env.NODE_ENV==='production')
+{
+    app.use('/' , express.static('client/build'))
+    app.get('*' , (req,res)=>{
+         res.sendFile(path.resolve(__dirname , 'client/build/index.html'))
+    }) 
 }
 
-start();
+const port = process.env.PORT || 5000;
+
+app.get("/", (req, res) => res.send("Hello World! from home api"));
+app.listen(port, () => console.log(`Node JS Server Running at port ${port}`));
