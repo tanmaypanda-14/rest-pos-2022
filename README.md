@@ -1,12 +1,12 @@
 # rest-pos-2022
 
 ###on priority:
-    - Bill generation page[] --tanmay 
-    - Customer page[] -- tanmay 
-    - Add a stats page[] -- divyansh
-    - Fix: duplicate order entries in cart[] -- 
-    - Fix: Added item not showing up in home page[] --  
-    - Fix: Unique cart for every unique member[] --  
+    - Bill generation page[]
+    - Customer page[]
+    - Add a stats page[]
+    - Fix: duplicate order entries in cart[]
+    - Fix: Added item not showing up in home page[]
+    - Fix: Unique cart for every unique member[]  
 -- 21st dec fixes deadline
 
 --till jan 15th-- 
