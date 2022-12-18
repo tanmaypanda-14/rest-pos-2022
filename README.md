@@ -1,3 +1,12 @@
+# This repo is a test repo(it has missing security features). Only feature developments take place on this repo. Once a feature is implemented without breaking changes, the feature is then added to mundane-mern repo.  
+this repo has no:-  
+ - middleware
+ - bcrypt to hash pw in mongo
+ - logging
+ - controller routes
+ - .env file
+ - mongoose-sequence
+ - express-async-handler  
  
 # rest-pos-2022
 
