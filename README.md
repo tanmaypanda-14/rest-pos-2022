@@ -13,12 +13,12 @@ this repo has no:-
 ### on priority
     --till jan 15th--  
     21st dec fixes deadline 
-        - Bill generation page[]  
-        - Customer page[]  
-        - Add a stats page[]  
-        - Fix: duplicate order entries in cart[]  
-        - Fix: Added item not showing up in home page[]  
-        - Fix: Unique cart for every unique member[]  
+        - Bill generation page[X]  
+        - Customer page[X]  
+        - Add a stats page[?]  
+        - Fix: duplicate order entries in cart[?]  
+        - Fix: Added item not showing up in home page[?]  
+        - Fix: Unique cart for every unique member[?]  
  
 ```
 -- till feb 15th  
