@@ -43,6 +43,7 @@ const DLayout = (props) => {
                     }}
                     items={[
                         { label: 'Home', key : "/home", icon: <HomeOutlined /> },
+                        { label: 'Cart', key : "/cart", icon: <ShoppingCartOutlined/> },
                         { label: 'Items', key : "/items", icon: <UnorderedListOutlined /> },
                         { label: 'Bills', key : "/bill", icon: <CopyOutlined /> },
                         { label: 'Customers', key : "/customer", icon: <UserOutlined /> },
