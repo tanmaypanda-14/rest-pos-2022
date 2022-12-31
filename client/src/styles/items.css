@@ -164,7 +164,7 @@ input:focus{
 /* ================================================Bill styling */
 
 .bill-header{
-    border-bottom: 2px dotted rgb(77, 76, 76);
+    border-bottom: 1px dotted rgb(0, 0, 0);
 }
 .bill-model h1{
     font-size: 30px;
@@ -176,7 +176,7 @@ input:focus{
 }
 .dotted-border{
     margin: 5px 0;
-    border-bottom: 2px dotted rgb(77, 76, 76);
+    border-bottom: 1px dotted rgb(0, 0, 0);
 }
 .bill-model h2{
     margin-bottom: 0 !important;

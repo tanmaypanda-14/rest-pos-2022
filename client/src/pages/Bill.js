@@ -152,7 +152,7 @@ function Bills() {
             </div>
 
             <div>
-                <h2><b>GRAND TOTAL : {selectedBill.totalAmount}</b></h2>
+                <h4>GRAND TOTAL : {selectedBill.totalAmount}</h4>
             </div>
             <div className="dotted-border"></div>
 
