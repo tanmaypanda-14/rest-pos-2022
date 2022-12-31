@@ -13,19 +13,13 @@ function Home() {
   const dispatch = useDispatch();
   const categories = [
     {
-      name: "Appetizers",
-      imageURL:
-        "https://www.acouplecooks.com/wp-content/uploads/2022/06/Caprese-Skewers-009.jpg",
+      name: "Appetizers"
     },
     {
-      name: "Fries",
-      imageURL:
-        "https://static.toiimg.com/thumb/54659021.cms?imgsize=275086&width=800&height=800",
+      name: "Fries"
     },
     {
-      name: "Rolls",
-      imageURL:
-        "https://frommybowl.com/wp-content/uploads/2020/12/chana-kathi-rolls-landscape.jpg",
+      name: "Rolls"
     },
   ];
   const getAllItems = () => {
@@ -58,7 +52,6 @@ function Home() {
               }`}
             >
               <h4>{category.name}</h4>
-              <img src={category.imageURL} alt="" height="60" width="80" />
             </div>
           );
         })}

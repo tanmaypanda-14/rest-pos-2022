@@ -47,7 +47,7 @@
 }
 
 .logo h3{
-  color:#05a5a5 !important;
+  color: white;
   font-size: 22px;
   font-weight: bold;
   text-align: center;
@@ -55,7 +55,6 @@
 }
 
 .ant-menu-item-selected{
-  background-color: #047979 !important;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }

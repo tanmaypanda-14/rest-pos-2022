@@ -11,9 +11,9 @@ function Item({item}) {
   return (
     <div>
       <h4 className='name'>{item.name}</h4>
+      <h5 className='price'>Price :₹{item.price}</h5>
       <img src={item.image} alt={item.name} height='100' width='100'/>
-      <h5 className='price'><b>Price : </b>₹{item.price}</h5>
-      <div className='d-flex justify-content-end'>
+      <div className='d-flex'>
         <Button onClick={()=>addTocart()}>Add to Cart</Button>
       </div>
     </div>

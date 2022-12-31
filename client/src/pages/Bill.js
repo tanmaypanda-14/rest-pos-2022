@@ -85,7 +85,7 @@ function Bills() {
       ),
     },
     {
-        title: "Total fare",
+        title: "Total",
         dataIndex: "_id",
         render: (id, record) => (
           <div>
@@ -115,7 +115,7 @@ function Bills() {
           onCancel={() => {
             setPrintBillModalVisibilty(false);
           }}
-          visible={printBillModalVisibility}
+          open={printBillModalVisibility}
           title="Bill Details"
           footer={false}
           width={800}
@@ -157,8 +157,7 @@ function Bills() {
             <div className="dotted-border"></div>
 
             <div className="text-center">
-                  <p>Thanks</p>
-                  <p>Visit Again :)</p>
+              {/* greetings */}
             </div>
           </div>
 
