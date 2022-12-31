@@ -45,7 +45,7 @@ const DLayout = (props) => {
                         { label: 'Home', key : "/home", icon: <HomeOutlined /> },
                         { label: 'Cart', key : "/cart", icon: <ShoppingCartOutlined/> },
                         { label: 'Items', key : "/items", icon: <UnorderedListOutlined /> },
-                        { label: 'Bills', key : "/bill", icon: <CopyOutlined /> },
+                        { label: 'Bills', key : "/bills", icon: <CopyOutlined /> },
                         { label: 'Customers', key : "/customer", icon: <UserOutlined /> },
                         { label: 'Logout', key : "logout", icon: <LogoutOutlined /> }
                     ]}
