@@ -1,4 +1,4 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined, ShoppingCartOutlined, LogoutOutlined, UnorderedListOutlined, UserOutlined, HomeOutlined, CopyOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined, FileTextOutlined, ShoppingCartOutlined, LogoutOutlined, UnorderedListOutlined, UserOutlined, HomeOutlined, CopyOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -45,6 +45,7 @@ const DLayout = (props) => {
                         { label: 'Home', key : "/home", icon: <HomeOutlined /> },
                         { label: 'Cart', key : "/cart", icon: <ShoppingCartOutlined/> },
                         { label: 'Items', key : "/items", icon: <UnorderedListOutlined /> },
+                        { label: 'Orders', key : "/orders", icon: <FileTextOutlined /> },
                         { label: 'Bills', key : "/bills", icon: <CopyOutlined /> },
                         { label: 'Customers', key : "/customer", icon: <UserOutlined /> },
                         { label: 'Logout', key : "logout", icon: <LogoutOutlined /> }

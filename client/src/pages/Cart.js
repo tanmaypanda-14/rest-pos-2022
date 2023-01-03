@@ -1,4 +1,4 @@
-import { Button, Form, Input, message, Modal, Select, Table } from 'antd'
+import { Button, Form, message, Modal, Select, Table } from 'antd'
 import React, { useEffect, useState } from 'react'
 import DLayout from '../components/DLayout.js'
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 function Cart() {
   const { cartItems } = useSelector(state => state.rootReducer)
-  const [billChargeModal, setBillChargeModal] = useState(false);
+  const [placeOrderModal, setPlaceOrderModal] = useState(false);
   const [subTotal, setSubTotal] = useState(0);
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -70,7 +70,6 @@ function Cart() {
     });
     setSubTotal(temp);
   }, [cartItems]);
-
   const onFinish = (values) => {
     const reqObject = {
       ...values,
@@ -85,10 +84,10 @@ function Cart() {
     console.log(reqObject);
 
     axios
-      .post("/api/bills/charge-bill", reqObject)
+      .post("/api/orders/place-order", reqObject)
       .then(() => {
-        message.success("Bill Charged Successfully");
-        navigate('/bills')
+        message.success("Order Placed Successfully");
+        navigate('/orders')
       })
       .catch(() => {
         message.success("Something went wrong");
@@ -103,49 +102,31 @@ function Cart() {
         <div className='mr-3'>
           <h3>Subtotal: <b>₹{subTotal}/-</b></h3>
         </div>
-        <Button type="primary" onClick={() => setBillChargeModal(true)}>ChargeBill</Button>
+        {/* <Button type="primary" onClick={() => setBillChargeModal(true)}>ChargeBill</Button> */}
+        <Button type="primary" onClick={() => setPlaceOrderModal(true)}>Place Order</Button>
       </div>
       <Modal
-        title="Charge Bill"
-        open={billChargeModal}
+        title="Place Order"
+        open={placeOrderModal}
         footer={false}
-        onCancel={() => setBillChargeModal(false)}
+        onCancel={() => setPlaceOrderModal(false)}
       >
         {" "}
         <Form layout="vertical" onFinish={onFinish}>
-          <Form.Item name="customerName" label="Customer Name">
-            <Input />
-          </Form.Item>
-          <Form.Item name="customerPhoneNumber" label="Phone Number">
-            <Input />
-          </Form.Item>
-
-          <Form.Item name="paymentMode" label="Payment Mode">
+          <Form.Item name="tableNumber" label="Table Number">
             <Select>
-              <Select.Option value="cash">Cash</Select.Option>
-              <Select.Option value="card">Card</Select.Option>
+              <Select.Option value="1">Table 1</Select.Option>
+              <Select.Option value="2">Table 2</Select.Option>
+              <Select.Option value="3">Table 3</Select.Option>
+              <Select.Option value="4">Table 4</Select.Option>
             </Select>
           </Form.Item>
-
-          <div className="charge-bill-amount">
-            <h5>
-              SubTotal : <b>{subTotal}</b>
-            </h5>
-            <h5>
-              Tax : <b>{((subTotal / 100) * 18).toFixed(2)}</b>
-            </h5>
-            <hr />
-            <h2>
-              Grand Total : <b>{subTotal + (subTotal / 100) * 18}</b>
-            </h2>
-          </div>
-
-          <div className="d-flex justify-content-end">
+          <div className="d-flex justify-end-content">
             <Button htmlType="submit" type="primary">
-              GENERATE BILL
+              PLACE ORDER
             </Button>
           </div>
-        </Form>{" "}
+        </Form>
       </Modal>
     </DLayout>
   )

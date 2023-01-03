@@ -7,6 +7,8 @@ import Register from './pages/Register.js'
 import Login from './pages/Login.js'
 import Bills from './pages/Bill.js';
 import Customers from './pages/Customer.js';
+import Orders from './pages/Orders.js';
+
 function App() {
   return (
     <BrowserRouter>
@@ -14,6 +16,7 @@ function App() {
         <Route path="/home" element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path="/items" element={<ProtectedRoute><Items /></ProtectedRoute>} />
         <Route path="/cart" element={<ProtectedRoute><Cart /></ProtectedRoute>} />
+        <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
         <Route path="/bills" element={<ProtectedRoute><Bills /></ProtectedRoute>} />
         <Route path="/customer" element={<ProtectedRoute><Customers /></ProtectedRoute>} />
         <Route path="/register" element={<Register />} />
