@@ -31,6 +31,12 @@ function Cart() {
     })
   }
 
+  const clearCart = () => {
+    dispatch({
+      type: 'clearCart'
+    })
+  }
+
   const columns = [
     {
       title: 'Name',
@@ -87,6 +93,7 @@ function Cart() {
       .post("/api/orders/place-order", reqObject)
       .then(() => {
         message.success("Order Placed Successfully");
+        clearCart();
         navigate('/orders')
       })
       .catch(() => {
