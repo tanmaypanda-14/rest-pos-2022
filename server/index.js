@@ -6,9 +6,11 @@ app.use(express.json());
 const itemsRoute = require("./routes/itemsRoute");
 const usersRoute = require("./routes/userRoute");
 const billsRoute = require('./routes/billsRoute')
+const cartRoute = require('./routes/cartRoute')
 app.use("/api/items/", itemsRoute);
 app.use("/api/users/", usersRoute);
 app.use("/api/bills/", billsRoute);
+app.use("/carts", cartRoute)
 const path = require('path')
 
 if(process.env.NODE_ENV==='production')

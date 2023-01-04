@@ -9,14 +9,18 @@ import '../styles/Layout.css';
 const { Header, Sider, Content } = Layout;
 const DLayout = (props) => {
     const [collapsed, setCollapsed] = useState(false);
-    const { cartItems, loading } = useSelector(state => state.rootReducer);
-    useEffect(() => {
-        localStorage.setItem('cartItems', JSON.stringify(cartItems));
-    }, [cartItems]);
+    // const { cartItems, loading } = useSelector(state => state.rootReducer);
+    
+    // useEffect(() => {
+    //     localStorage.setItem('cartItems', JSON.stringify(cartItems));
+    // }, [cartItems]);
+    // useEffect(() => {
+    //     console.log(cartDetails);
+    // }, [cartDetails]);
     const navigate = useNavigate();
     return (
         <Layout>
-            {loading && (
+            {/* {loading && (
                 <div className="spinner">
                     <div className="d-flex justify-content-center">
                         <div className="spinner-border" role="status">
@@ -24,7 +28,7 @@ const DLayout = (props) => {
                         </div>
                     </div>
                 </div>
-            )}
+            )} */}
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="logo">
                     <h3>REST-2022</h3>
@@ -62,7 +66,7 @@ const DLayout = (props) => {
                         onClick: () => setCollapsed(!collapsed),
                     })}
                     <div className='cart-count d-flex align-items-center' onClick={() => navigate('/cart')}>
-                        <b><p className='mt-3 mr-2'>{cartItems.length}</p></b>
+                        {/* <b><p className='mt-3 mr-2'>{cartItems.length}</p></b> */}
                         <ShoppingCartOutlined />
                     </div>
 

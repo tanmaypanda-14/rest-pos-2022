@@ -9,7 +9,7 @@ function Login() {
   const navigate = useNavigate();
   const onFinish = (values) => {
     console.log(values);
-    dispatch({ type: "showLoading" });
+    // dispatch({ type: "showLoading" });
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -20,13 +20,14 @@ function Login() {
     axios
       .post("/api/users/login", values, config)
       .then((res) => {
-        dispatch({ type: "hideLoading" });
+        // dispatch({ type: "hideLoading" });
         message.success("Login successfull");
         localStorage.setItem("rest-user", JSON.stringify(res.data));
+        localStorage.setItem("userId",res.data._id);
         navigate("/home");
       })
       .catch(() => {
-        dispatch({ type: "hideLoading" });
+        // dispatch({ type: "hideLoading" });
         message.error("Something went wrong");
       });
   };

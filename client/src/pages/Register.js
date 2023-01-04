@@ -8,12 +8,12 @@ function Register() {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const onFinish=(values)=>{
-         dispatch({type:'showLoading'})
+        //  dispatch({type:'showLoading'})
          axios.post('/api/users/register' , values).then((res)=>{
-          dispatch({type:'hideLoading'})
+          // dispatch({type:'hideLoading'})
            message.success('Registration successfull , please wait for verification')
          }).catch(()=>{
-          dispatch({type:'hideLoading'})
+          // dispatch({type:'hideLoading'})
            message.error('Something went wrong')
          })
   }

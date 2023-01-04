@@ -6,6 +6,7 @@ import "./index.css";
 import { Provider } from "react-redux";
 import { createStore, combineReducers } from "redux";
 import { rootReducer } from "./redux/rootReducer";
+import store from './redux/index'
 
 const finalReducer = combineReducers({
   rootReducer: rootReducer,
@@ -19,7 +20,7 @@ const initialState = {
   },
 };
 
-const store = createStore(finalReducer, initialState);
+// const store = createStore(finalReducer, initialState);
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

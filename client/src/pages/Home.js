@@ -2,12 +2,16 @@ import DLayout from "../components/DLayout.js";
 import React, { useEffect } from "react";
 import axios from "axios";
 import { Row, Col } from "antd";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import useCarts from "../redux/cartActions.js";
 import Item from "../components/Item.js";
 
 import "../styles/items.css";
 
 function Home() {
+
+  const {getCartItems} = useCarts();
+  const cartItems = useSelector((state)=>state.cart?.cartItems);
   const [itemsData, setItemsData] = React.useState([]);
   const [selectedCategory, setSelectedCategoty] = React.useState("Appetizers");
   const dispatch = useDispatch();
@@ -29,23 +33,28 @@ function Home() {
     },
   ];
   const getAllItems = () => {
-    dispatch({ type: "showLoading" });
+    // dispatch({ type: "showLoading" });
     axios
       .get("/api/items/get-all-items")
       .then((response) => {
-        dispatch({ type: "hideLoading" });
+        // dispatch({ type: "hideLoading" });
         setItemsData(response.data);
       })
       .catch((error) => {
-        dispatch({ type: "hideLoading" });
+        // dispatch({ type: "hideLoading" });
         console.log(error);
       });
+      getCartItems();
   };
 
   useEffect(() => {
     getAllItems(); // eslint-disable-next-line
+    console.log(itemsData);
   }, []);
 
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems])
   return (
     <DLayout>
       <div className="d-flex categories">
@@ -70,7 +79,7 @@ function Home() {
           .map((item) => {
             return (
               <Col xs={24} lg={6} md={12} sm={6}>
-                <Item item={item} />
+                <Item item={item} cartItems={cartItems}/>
               </Col>
             );
           })}

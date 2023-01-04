@@ -1,28 +1,35 @@
 import React, { useEffect, useState } from 'react'
 import DLayout from '../components/DLayout.js'
 import axios from 'axios';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 import { Button, Form, Input, message, Select, Modal, Table } from 'antd';
 
 
 function Items() {
+  const cartItems = useSelector(state => state.cart.cartItems)
+
   const [itemsData, setItemsData] = useState([]);
   const [addEditModalVisibility, setAddEditModalVisibilty] = useState(false);
   const [editingItem, setEditingItem] = useState(null);
   const dispatch = useDispatch();
   const getAllItems = () => {
-    dispatch({ type: 'showLoading' });
+    // dispatch({ type: 'showLoading' });
     axios
       .get('/api/items/get-all-items')
       .then((response) => {
-        dispatch({ type: 'hideLoading' });
+        // dispatch({ type: 'hideLoading' });
         setItemsData(response.data);
       }).catch((error) => {
-        dispatch({ type: 'hideLoading' });
+        // dispatch({ type: 'hideLoading' });
         console.log(error);
       });
   };
+
+  useEffect(() => {
+    console.log(cartItems);
+  }, [cartItems])
 
   useEffect(() => {
     getAllItems();// eslint-disable-next-line
@@ -61,17 +68,17 @@ function Items() {
   ]
 
   const onFinish = (values) => {
-    dispatch({ type: 'showLoading' });
+    // dispatch({ type: 'showLoading' });
     if (editingItem===null) {
       axios
         .post('/api/items/add-item', values)
         .then((response) => {
-          dispatch({ type: 'hideLoading' });
+          // dispatch({ type: 'hideLoading' });
           message.success("Item added successfully");
           setAddEditModalVisibilty(false);
           getAllItems();
         }).catch((error) => {
-          dispatch({ type: 'hideLoading' });
+          // dispatch({ type: 'hideLoading' });
           console.log(error);
           message.error("Something went wrong");
         });
@@ -79,13 +86,13 @@ function Items() {
       axios
         .post('/api/items/edit-item', { ...values, itemId: editingItem._id })
         .then((response) => {
-          dispatch({ type: 'hideLoading' });
+          // dispatch({ type: 'hideLoading' });
           message.success("Item Edited successfully");
           setEditingItem(null);
           setAddEditModalVisibilty(false);
           getAllItems();
         }).catch((error) => {
-          dispatch({ type: 'hideLoading' });
+          // dispatch({ type: 'hideLoading' });
           console.log(error);
           message.error("Something went wrong");
         });
@@ -93,15 +100,15 @@ function Items() {
   }
 
   const deleteItem = (record) => {
-    dispatch({ type: 'showLoading' });
+    // dispatch({ type: 'showLoading' });
     axios
       .post('/api/items/delete-item', { itemId: record._id })
       .then((response) => {
-        dispatch({ type: 'hideLoading' });
+        // dispatch({ type: 'hideLoading' });
         message.success("Item Deleted successfully");
         getAllItems();
       }).catch((error) => {
-        dispatch({ type: 'hideLoading' });
+        // dispatch({ type: 'hideLoading' });
         message.error("Something went wrong");
         console.log(error);
       });
