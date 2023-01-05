@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import DLayout from "../components/DLayout";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { DeleteOutlined, EyeOutlined } from "@ant-design/icons";
-import { Button, Form, Input, message, Modal, Select, Table } from "antd";
+import { EyeOutlined } from "@ant-design/icons";
+import { Button, Modal,  Table } from "antd"; // eslint-disable-next-line
 import ReactToPrint from 'react-to-print';
 import { useReactToPrint } from 'react-to-print';
 function Bills() {
@@ -96,7 +96,7 @@ function Bills() {
   ];
 
   useEffect(() => {
-    getAllBills();
+    getAllBills(); // eslint-disable-next-line
   }, []);
 
   const handlePrint = useReactToPrint({

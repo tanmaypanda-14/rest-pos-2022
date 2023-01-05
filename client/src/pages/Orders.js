@@ -9,10 +9,14 @@ import { useNavigate } from 'react-router-dom';
 
 
 function Orders() {
+  const [subTotalAll, setsubTotalAll] = useState(0)
   const [ordersData, setOrdersData] = React.useState([]);
+  const [tableNo, setTableNo] = useState(1)
   const [orderDetailModalVisibilty, setOrderDetailModalVisibilty] = useState(false);
+  const [orderTableModalVisibilty, setOrderTableModalVisibilty] = useState(false);
   const [genBillModalVisibilty, setGenBillModalVisibilty] = useState(false);
   const [selectOrder, setSelectOrder] = useState(null);
+  const [tableOrder, setTableOrder] = useState(null)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const getAllOrders = () => {
@@ -71,7 +75,7 @@ function Orders() {
     },
     {
       title: "Quantity",
-      dataIndex: "_id",
+      dataIndex: "quantity",
       render: (id, record) => (
         <div>
           <b>{record.quantity}</b>
@@ -83,15 +87,28 @@ function Orders() {
   useEffect(() => {
     getAllOrders(); // eslint-disable-next-line
   }, []);
+  useEffect(() => {
+    console.log(tableOrder); // eslint-disable-next-line
+  }, [tableOrder]);
+
+  const handleSelect = (values) => {
+    setTableNo(values);
+  }
+
+  useEffect(() => {
+    console.log(tableNo);
+  }, [tableNo])
 
   const onFinish = (values) => {
     const reqObject = {
       ...values,
-      cartItems: selectOrder.cartItems,
-      tableNumber: selectOrder.tableNumber,
-      subTotal: selectOrder.subTotal,
-      tax: selectOrder.tax,
-      totalAmount: selectOrder.totalAmount,
+      cartItems: tableOrder,
+      tableNumber: tableNo,
+      subTotal: subTotalAll,
+      tax: Number(((subTotalAll / 100) * 18).toFixed(2)),
+      totalAmount: Number(
+        subTotalAll + Number(((subTotalAll / 100) * 18).toFixed(2))
+      ),
       userId: JSON.parse(localStorage.getItem("rest-user"))._id,
     };
     console.log(reqObject);
@@ -100,6 +117,18 @@ function Orders() {
       .then(() => {
         message.success("Bill Charged Successfully");
         navigate('/bills')
+      })
+      .catch(() => {
+        message.success("Something went wrong");
+      });
+
+    const tableN = {
+      tableNumber: tableNo
+    }
+    axios
+      .post("/api/orders/delete-order-table/", tableN)
+      .then(() => {
+        getAllOrders(); // eslint-disable-next-line
       })
       .catch(() => {
         message.success("Something went wrong");
@@ -127,11 +156,6 @@ function Orders() {
             dataSource={selectOrder && selectOrder.cartItems}
             bordered
           />
-          <div className="d-flex justify-content-end">
-            <Button htmlType="submit" type="primary" onClick={()=> setGenBillModalVisibilty(true)}>
-              GENERATE BILL
-            </Button>
-          </div>
         </Modal>
       )}
       <Modal
@@ -158,14 +182,16 @@ function Orders() {
 
           <div className="charge-bill-amount">
             <h5>
-              SubTotal : <b>{selectOrder && selectOrder.subTotal}</b>
+              SubTotal : <b>{subTotalAll}</b>
             </h5>
             <h5>
-              Tax : <b>{selectOrder && selectOrder.tax}</b>
+              Tax : <b>{Number(((subTotalAll / 100) * 18).toFixed(2))}</b>
             </h5>
             <hr />
             <h2>
-              Grand Total : <b>{selectOrder && selectOrder.totalAmount}</b>
+              Grand Total : <b>{Number(
+                subTotalAll + Number(((subTotalAll / 100) * 18).toFixed(2))
+              )}</b>
             </h2>
           </div>
 
@@ -175,6 +201,53 @@ function Orders() {
             </Button>
           </div>
         </Form>{" "}
+      </Modal>
+      <Form layout='vertical'>
+        <Form.Item name="tableSelect" label="Select a Table">
+          <Select onChange={handleSelect} defaultValue='1'>
+            <Select.Option value="1">Table 1</Select.Option>
+            <Select.Option value="2">Table 2</Select.Option>
+            <Select.Option value="3">Table 3</Select.Option>
+            <Select.Option value="4">Table 4</Select.Option>
+          </Select>
+        </Form.Item>
+      </Form>
+      <Button htmlType="submit" type="primary" onClick={() => {
+        const newArray = ordersData.filter(item => item.tableNumber === parseInt(tableNo))
+        var newArray2 = []
+        var subTotalAll2 = 0; // eslint-disable-next-line
+        const newArray3 = newArray.map(item => {
+          subTotalAll2 = subTotalAll2 + parseInt(item.subTotal)
+          setsubTotalAll(subTotalAll2)
+          console.log(subTotalAll2);
+          item.cartItems.map(item2 => (
+            newArray2.push(item2)
+          ))
+        })
+        setTableOrder(newArray2)
+        // console.log(record)
+        setOrderTableModalVisibilty(true)
+      }}>
+        GENERATE BILL
+      </Button>
+      <Modal title="Generate Bill 2"
+        open={orderTableModalVisibilty}
+        onCancel={() => setOrderTableModalVisibilty(false)}
+        width={800}
+        footer={null}>
+        <div className="d-flex justify-content-between">
+          <h4>Table Number: {tableNo}</h4>
+        </div>
+        <Table
+          columns={cartcolumns}
+          dataSource={tableOrder}
+          bordered
+        />
+        <div className="d-flex justify-content-end">
+          <Button htmlType="submit" type="primary" onClick={() => setGenBillModalVisibilty(true)}>
+            GENERATE BILL
+          </Button>
+        </div>
       </Modal>
     </DLayout>
   )

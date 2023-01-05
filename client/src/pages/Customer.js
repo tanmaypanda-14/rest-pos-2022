@@ -1,10 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import DLayout from "../components/DLayout";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { Table } from "antd";
 function Customers() {
-  const componentRef = useRef();
   const [billsData, setBillsData] = useState([]);
 
   const dispatch = useDispatch();
@@ -44,7 +43,7 @@ function Customers() {
 
 
   useEffect(() => {
-    getAllBills();
+    getAllBills(); // eslint-disable-next-line
   }, []);
 
 

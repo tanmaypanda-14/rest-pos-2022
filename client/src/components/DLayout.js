@@ -1,4 +1,4 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined, FileTextOutlined, ShoppingCartOutlined, LogoutOutlined, UnorderedListOutlined, UserOutlined, HomeOutlined, CopyOutlined } from '@ant-design/icons';
+import { MenuFoldOutlined, MenuUnfoldOutlined, AreaChartOutlined, FileTextOutlined, ShoppingCartOutlined, LogoutOutlined, UnorderedListOutlined, UserOutlined, HomeOutlined, CopyOutlined } from '@ant-design/icons';
 import { Layout, Menu } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -27,7 +27,7 @@ const DLayout = (props) => {
             )}
             <Sider trigger={null} collapsible collapsed={collapsed}>
                 <div className="logo">
-                    <h3>REST-2022</h3>
+                    <h3>{collapsed ? 'R2' : 'REST-2022'}</h3>
                 </div>
                 <Menu
                     theme="dark"
@@ -37,18 +37,19 @@ const DLayout = (props) => {
                         if (key === 'logout') {
                             localStorage.removeItem('rest-user');
                             navigate('/login');
-                        } else{
+                        } else {
                             navigate(key);
                         }
                     }}
                     items={[
-                        { label: 'Home', key : "/home", icon: <HomeOutlined /> },
-                        { label: 'Cart', key : "/cart", icon: <ShoppingCartOutlined/> },
-                        { label: 'Items', key : "/items", icon: <UnorderedListOutlined /> },
-                        { label: 'Orders', key : "/orders", icon: <FileTextOutlined /> },
-                        { label: 'Bills', key : "/bills", icon: <CopyOutlined /> },
-                        { label: 'Customers', key : "/customer", icon: <UserOutlined /> },
-                        { label: 'Logout', key : "logout", icon: <LogoutOutlined /> }
+                        { label: 'Home', key: "/home", icon: <HomeOutlined /> },
+                        { label: 'Cart', key: "/cart", icon: <ShoppingCartOutlined /> },
+                        { label: 'Items', key: "/items", icon: <UnorderedListOutlined /> },
+                        { label: 'Orders', key: "/orders", icon: <FileTextOutlined /> },
+                        { label: 'Bills', key: "/bills", icon: <CopyOutlined /> },
+                        { label: 'Customers', key: "/customer", icon: <UserOutlined /> },
+                        { label: 'Statistics', key: "/stats", icon: <AreaChartOutlined /> },
+                        { label: 'Logout', key: "logout", icon: <LogoutOutlined /> }
                     ]}
                 ></Menu>
             </Sider>
