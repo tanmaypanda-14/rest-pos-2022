@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Button, Col, Form, Input, message, Row } from "antd";
+import { Button, Col, Form, Input, Select, message, Row } from "antd";
 import '../styles/authentication.css'
 import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom';
@@ -34,6 +34,12 @@ function Register() {
             <h3>Register</h3>
             <Form.Item name="name" label="Name">
               <Input />
+            </Form.Item>
+            <Form.Item name="roles" label="Role">
+              <Select>
+                <Select.Option value="admin">Admin</Select.Option>
+                <Select.Option value="user">User</Select.Option>
+              </Select>
             </Form.Item>
             <Form.Item name="userId" label="User ID">
               <Input />

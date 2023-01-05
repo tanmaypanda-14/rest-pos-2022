@@ -8,7 +8,6 @@ function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const onFinish = (values) => {
-    console.log(values);
     dispatch({ type: "showLoading" });
     const config = {
       headers: {
@@ -23,6 +22,7 @@ function Login() {
         dispatch({ type: "hideLoading" });
         message.success("Login successfull");
         localStorage.setItem("rest-user", JSON.stringify(res.data));
+        console.log(res.data)
         navigate("/home");
       })
       .catch(() => {
