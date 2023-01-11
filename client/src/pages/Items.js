@@ -109,7 +109,7 @@ function Items() {
 
   return (
     <DLayout>
-      <div className='d-flex justify-content-between'>
+      <div className='flex p-3 justify-between'>
         <h1>Items</h1>
         <Button type='primary' onClick={() => setAddEditModalVisibilty(true)}>Add Item</Button>
       </div>

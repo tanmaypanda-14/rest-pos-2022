@@ -135,9 +135,31 @@ function Orders() {
       });
   };
 
+  // const onSplit = (values) => {
+  //   const reqObject = {
+  //     ...values,
+  //     cartItems: selectOrder.cartItems,
+  //     tableNumber: selectOrder.tableNumber,
+  //     subTotal: selectOrder.subTotal,
+  //     tax: selectOrder.tax,
+  //     totalAmount: selectOrder.totalAmount,
+  //     userId: JSON.parse(localStorage.getItem("rest-user"))._id,
+  //   };
+  //   console.log(reqObject);
+  //   axios
+  //     .post("/api/bills/charge-bill", reqObject)
+  //     .then(() => {
+  //       message.success("Bill Charged Successfully");
+  //       navigate('/bills')
+  //     })
+  //     .catch(() => {
+  //       message.success("Something went wrong");
+  //     });
+  // };
+
   return (
     <DLayout>
-      <h1>Orders</h1>
+      <h3>Orders</h3>
       <Table columns={columns} dataSource={ordersData} bordered />
       {orderDetailModalVisibilty && (
         <Modal
@@ -156,6 +178,11 @@ function Orders() {
             dataSource={selectOrder && selectOrder.cartItems}
             bordered
           />
+          <div className="flex justify-end">
+            <Button htmlType="submit" type="primary">
+              GENERATE BILL
+            </Button>
+          </div>
         </Modal>
       )}
       <Modal
@@ -195,7 +222,7 @@ function Orders() {
             </h2>
           </div>
 
-          <div className="d-flex justify-content-end">
+          <div className="flex justify-end">
             <Button htmlType="submit" type="primary">
               GENERATE BILL
             </Button>
@@ -235,7 +262,7 @@ function Orders() {
         onCancel={() => setOrderTableModalVisibilty(false)}
         width={800}
         footer={null}>
-        <div className="d-flex justify-content-between">
+        <div className="flex justify-between">
           <h4>Table Number: {tableNo}</h4>
         </div>
         <Table

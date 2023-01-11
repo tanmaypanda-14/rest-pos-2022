@@ -105,7 +105,7 @@ function Cart() {
     <DLayout>
       <Table columns={columns} dataSource={cartItems} bordered />
       <hr />
-      <div className='d-flex justify-content-end flex-column align-items-end'>
+      <div className='flex justify-content-end flex-col items-end'>
         <div className='mr-3'>
           <h3>Subtotal: <b>₹{subTotal}/-</b></h3>
         </div>

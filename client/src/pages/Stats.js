@@ -1,10 +1,14 @@
 import React from 'react'
 import DLayout from '../components/DLayout'
+import { BarChart } from '../components/charts/BillBarChart'
 
 function Stats() {
     return (
         <DLayout>
-            <div>Stats</div>
+            <h3>Stats</h3>
+            <div className='container'>
+                <BarChart />
+            </div>
         </DLayout>
     )
 }

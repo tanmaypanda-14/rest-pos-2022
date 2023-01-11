@@ -28,6 +28,7 @@ function Home() {
       .get("/api/items/get-all-items")
       .then((response) => {
         dispatch({ type: "hideLoading" });
+        console.log(response.data)
         setItemsData(response.data);
       })
       .catch((error) => {
@@ -42,12 +43,12 @@ function Home() {
 
   return (
     <DLayout>
-      <div className="d-flex categories">
+      <div className="flex categories">
         {categories.map((category) => {
           return (
             <div
               onClick={() => setSelectedCategoty(category.name)}
-              className={`d-flex category ${
+              className={`flex category ${
                 selectedCategory === category.name && "selected-category"
               }`}
             >

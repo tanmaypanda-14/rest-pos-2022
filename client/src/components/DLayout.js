@@ -1,5 +1,5 @@
-import { MenuFoldOutlined, MenuUnfoldOutlined, AreaChartOutlined, FileTextOutlined, ShoppingCartOutlined, LogoutOutlined, UnorderedListOutlined, UserOutlined, HomeOutlined, CopyOutlined } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
+import { MenuFoldOutlined, MenuUnfoldOutlined, AreaChartOutlined, FileTextOutlined, ShoppingCartOutlined, LogoutOutlined, UnorderedListOutlined, UserOutlined, HomeOutlined, CopyOutlined, SettingOutlined } from '@ant-design/icons';
+import { Layout, Menu, Spin } from 'antd';
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
@@ -18,10 +18,8 @@ const DLayout = (props) => {
         <Layout>
             {loading && (
                 <div className="spinner">
-                    <div className="d-flex justify-content-center">
-                        <div className="spinner-border" role="status">
-                            <span className="visually-hidden">Loading...</span>
-                        </div>
+                    <div className="flex justify-center">
+                        <Spin size="large" />
                     </div>
                 </div>
             )}
@@ -49,6 +47,7 @@ const DLayout = (props) => {
                         { label: 'Bills', key: "/bills", icon: <CopyOutlined /> },
                         { label: 'Customers', key: "/customer", icon: <UserOutlined /> },
                         { label: 'Statistics', key: "/stats", icon: <AreaChartOutlined /> },
+                        { label: 'Settings', key: "/settings", icon: <SettingOutlined /> },
                         { label: 'Logout', key: "logout", icon: <LogoutOutlined /> }
                     ]}
                 ></Menu>
@@ -64,8 +63,8 @@ const DLayout = (props) => {
                         className: 'trigger',
                         onClick: () => setCollapsed(!collapsed),
                     })}
-                    <div className='cart-count d-flex align-items-center' onClick={() => navigate('/cart')}>
-                        <b><p className='mt-3 mr-2'>{cartItems.length}</p></b>
+                    <div className='cart-count flex items-center' onClick={() => navigate('/cart')}>
+                        <b><p className='mt-3'>{cartItems.length}</p></b>
                         <ShoppingCartOutlined />
                     </div>
 

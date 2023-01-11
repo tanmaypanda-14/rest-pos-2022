@@ -10,6 +10,7 @@ import Customers from './pages/Customer.js';
 import Orders from './pages/Orders.js';
 import Stats from './pages/Stats.js';
 import Noauth from './pages/Noauth.js';
+import Settings from './pages/Settings.js';
 
 function App() {
   return (
@@ -23,36 +24,35 @@ function App() {
         <Route path="/customer" element={<ProtectedRouteAdmin><Customers /></ProtectedRouteAdmin>} />
         <Route path="/noauth" element={<ProtectedRouteEmployee><Noauth /></ProtectedRouteEmployee>} />
         <Route path="/stats" element={<ProtectedRouteAdmin><Stats /></ProtectedRouteAdmin>} />
+        <Route path="/settings" element={<ProtectedRouteAdmin><Settings /></ProtectedRouteAdmin>} />
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
-    );
+  );
 }
 
 export default App;
 
 //Employee basic route 
 // access to home, cart, orders, bills
-export function ProtectedRouteEmployee({children}){
+export function ProtectedRouteEmployee({ children }) {
 
-  if(localStorage.getItem('rest-user'))
-  {
+  if (localStorage.getItem('rest-user')) {
     return children
   }
-  else{
+  else {
     return <Navigate to='/login' />
   }
 
 }
 //Admin route
 // access to home, cart, orders, bills, customer, items
-export function ProtectedRouteAdmin({children}){
-  if(localStorage.getItem('rest-user') && JSON.parse(localStorage.getItem('rest-user')).roles === 'admin')
-  {
+export function ProtectedRouteAdmin({ children }) {
+  if (localStorage.getItem('rest-user') && JSON.parse(localStorage.getItem('rest-user')).roles === 'admin') {
     return children
   }
-  else{
+  else {
     return <Navigate to='/noauth' />
   }
 }
