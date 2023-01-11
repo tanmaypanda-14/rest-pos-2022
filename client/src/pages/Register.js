@@ -47,7 +47,7 @@ function Register() {
             <Form.Item name="password" label="Password">
               <Input type='password'/>
             </Form.Item>
-            <div className="d-flex justify-content-between align-items-center">
+            <div className="flex justify-between items-center">
               <Link to='/login'>Login</Link>
               <Button htmlType="submit" type="primary">
                 Register

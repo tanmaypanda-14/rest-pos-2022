@@ -53,7 +53,7 @@ function Login() {
               <Input type="password" />
             </Form.Item>
 
-            <div className="d-flex justify-content-between align-items-center">
+            <div className="flex justify-between items-center">
               <Link to="/register">
                 Register
               </Link>
